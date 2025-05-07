@@ -1,78 +1,107 @@
-# RetinoNet: EfficientNet and FPN-Based Framework for Diabetic Retinopathy Classification
+# RetinoNet: Multi-Scale Deep Learning Framework for Diabetic Retinopathy Classification
 
-## 📖 Description
-**RetinoNet** is a deep learning framework designed for the accurate stage-wise classification of diabetic retinopathy (DR) using fundus images. Leveraging **EfficientNet-B0** as the backbone and a **Feature Pyramid Network (FPN)** for multi-scale feature extraction, RetinoNet ensures scalability, interpretability, and preservation of critical image details, making it suitable for clinical applications. The model is trained to classify DR into four severity levels, providing a robust tool for early diagnosis and monitoring.
+## 1. Title
 
-This repository contains the complete implementation of RetinoNet, including preprocessing, model architecture, training, and evaluation scripts. The model achieves high accuracy on the test dataset, as demonstrated in the provided notebook.
+**RetinoNet: Multi-Scale Deep Learning Framework for Accurate Stage-wise Classification of Diabetic Retinopathy (DR)**
 
-## 📂 Dataset Information
-- **Source**: Messidor public fundus image dataset.
-- **Curated Version**: A custom-preprocessed dataset with images categorized into four diabetic retinopathy severity levels (Class 0, Class 1, Class 2, Class 3).
-- **Location**: The dataset is stored in the `/kaggle/dataset3/DATASET3/` directory, with subdirectories for each class.
+## 2. Description
+
+RetinoNet is a deep learning-based framework designed to accurately classify the severity of diabetic retinopathy (DR) using fundus images. The framework leverages EfficientNet-B0 as the backbone model, integrated with a Feature Pyramid Network (FPN) to extract multi-scale features for precise classification of DR severity levels. The implementation includes data preprocessing, model training, evaluation, and inference scripts, making it suitable for clinical and research applications.
+
+## 3. Dataset Information
+
+- **Source:** Messidor Public Fundus Image Dataset  
+- **Curated Version:** A preprocessed dataset with four DR severity levels:
+  - Class 0: No DR (120 files)
+  - Class 1: Mild DR (101 files)
+  - Class 2: Moderate DR (120 files)
+  - Class 3: Severe DR (120 files)
+- **Data Structure:** Organized as `/kaggle/dataset3/DATASET3/` with subdirectories for each class
 - **Access**: View the dataset on Kaggle: [Kaggle Dataset (view-only)](https://www.kaggle.com/datasets/anithajaikumar/dataset3).
 
-## ⚙️ Code Information
-This repository includes:
-- Image preprocessing: Background masking (GrabCut), histogram equalization, denoising
-- EfficientNetB0 as the backbone model
-- Feature Pyramid Network for multi-scale feature extraction
-- Global Average Pooling to prevent overfitting
-- Dense softmax layer for 4-class classification
+## 4. Code Information
 
-## 🚀 Usage Instructions
-1. **Clone the Repository**:
-   ```bash
-   git clone <repository-url>
-   cd RetinoNet
-   ```
-2. **Prepare the Dataset**:
-   - Download the curated dataset from the Kaggle link provided above.
-   - Place the dataset in the `/kaggle/dataset3/DATASET3/` directory, ensuring subdirectories for `class 0`, `class 1`, `class 2`, and `class 3` are maintained.
-   - Alternatively, modify the dataset path in the notebook to point to your local dataset directory.
-3. **Install Dependencies**:
-   Install the required Python libraries by running:
-   ```bash
-   pip install tensorflow numpy pandas opencv-python matplotlib scikit-image
-   ```
-4. **Run the Notebook**:
-   - Open the `retinonet-v2.ipynb` notebook in Jupyter or Kaggle.
-   - Execute the cells sequentially to preprocess the data, build the model, train it, and evaluate its performance.
-5. **Evaluate the Model**:
-   - The notebook includes a test evaluation step that outputs the test accuracy and loss.
-   - Use the trained model for inference on new fundus images by loading the model and preprocessing the images as described.
+- **Preprocessing:** Background masking (GrabCut), histogram equalization, and denoising  
+- **Model Architecture:** EfficientNet-B0 as backbone, FPN for multi-scale feature extraction  
+- **Training Scripts:** Includes training, validation, and evaluation scripts  
+- **Evaluation:** Accuracy reported as 96.77%  
+- **Inference:** Model inference script to predict DR severity on new fundus images
 
-## 📋 Requirements
-The following Python libraries are required to run the code:
-- `tensorflow` (for model building and training)
-- `numpy` (for numerical operations)
-- `pandas` (for data handling, if applicable)
-- `opencv-python` (for image preprocessing, e.g., GrabCut, histogram equalization)
-- `matplotlib` (for visualization, if used)
-- `scikit-image` (for additional image processing, if used)
+## 5. Usage Instructions
 
-Install these dependencies using:
+> **Important:** This repository can be run on both Kaggle and Jupyter Notebook.
+
+### Step 1: Kaggle Setup
+
+- Go to Kaggle and add the dataset to the notebook by attaching the dataset located at `anithajaikumar/dataset3`.
+- The dataset will be available at:  
+  `/kaggle/input/d/anithajaikumar/dataset3/DATASET3/`
+- Ensure that the directory structure is maintained as:
+
+    ```
+    /kaggle/input/d/anithajaikumar/dataset3/DATASET3/Class0
+    /kaggle/input/d/anithajaikumar/dataset3/DATASET3/Class1
+    /kaggle/input/d/anithajaikumar/dataset3/DATASET3/Class2
+    /kaggle/input/d/anithajaikumar/dataset3/DATASET3/Class3
+    ```
+
+### Step 2: Run the Notebook on Kaggle
+
+- Open the `retinonet-v2.ipynb` notebook.
+- Execute the cells in order to perform data preprocessing, model training, and evaluation.
+
+### Step 3: Evaluate Model
+
+- Run the final cell to evaluate the model.
+- The output will display accuracy and loss metrics.
+
+### Step 4: Jupyter Notebook Setup
+
+- Alternatively, download the repository and run it locally using Jupyter Notebook.
+- Ensure that the dataset is placed in the specified path as `/DATASET3/` with the correct class folder structure.
+
+### Step 5: Inference
+
+- Adjust the dataset path in the notebook to run inference on new data.
+
+## Requirements
+
+- Python 3.8+
+- TensorFlow 2.8+
+- NumPy, Pandas
+- OpenCV, scikit-image
+- Matplotlib
+
+**Install all dependencies using:**
 ```bash
-pip install tensorflow numpy pandas opencv-python matplotlib scikit-image
+pip install tensorflow numpy pandas opencv-python scikit-image matplotlib
 ```
+## 7. Methodology
 
-Additionally, a GPU (e.g., Tesla P100-PCIE-16GB, as used in the notebook) is recommended for faster training, though the code can run on CPU with reduced performance.
+### Data Preprocessing
+-  Background masking using **GrabCut**
+-  Histogram equalization for contrast enhancement
+-  Denoising for noise reduction
 
-## 🛠️ Methodology
-The development of RetinoNet involved the following steps:
-1. **Data Preprocessing**:
-   - Images were preprocessed using GrabCut for background masking, histogram equalization for contrast enhancement, and denoising to improve quality.
-   - Images were organized into four classes based on DR severity.
-2. **Dataset Preparation**:
-   - The dataset was split into training, validation, and test sets using TensorFlow’s `image_dataset_from_directory`.
-   - Images were resized to a consistent input size (e.g., 224x224, standard for EfficientNet-B0) and batched for training.
-3. **Model Design**:
-   - EfficientNet-B0 was used as the backbone, with pre-trained weights (not shown but typically from ImageNet).
-   - FPN was implemented by extracting features from multiple layers (`block6a`, `block4a`, `block3a`), followed by convolution, upsampling, and concatenation to create a rich feature map.
-   - A classification head with global average pooling and dense layers was added for 4-class classification.
-4. **Training**:
-   - The model was trained for 100 epochs, with training and validation accuracy/loss monitored.
-   - The model showed signs of overfitting after early epochs (e.g., high training accuracy but fluctuating validation accuracy), but later epochs achieved high validation accuracy (up to 96.74%).
-5. **Evaluation**:
-   - The model was evaluated on a separate test set, achieving 96.77% accuracy and a loss of 0.1978.
-   - The training history (accuracy and loss curves) can be visualized using the `history` object for further analysis.
+### Model Design
+-  **EfficientNet-B0** backbone
+-  **FPN** for multi-scale feature extraction
+-  Dense layer with **softmax** activation for multi-class classification
 
+### Training
+-  **Epochs:** 100  
+-  **Batch Size:** 32  
+-  **Optimizer:** Adam  
+-  **Loss:** Categorical Cross-Entropy
+
+### Evaluation
+-  Accuracy and loss metrics  
+-  Confusion matrix analysis
+
+## 8. Citations
+
+Not applicable
+
+## 9. License
+
+This project is licensed under the **MIT License**. See the `LICENSE.txt` file for details.
